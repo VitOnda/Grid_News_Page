@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:grid_api_news/model/news_model.dart';
 
 class NewsDataSource {
-  Future<List<NewsModel>> fetchNews() async {
+  Future<List<NewsModel>> getNews() async {
     print('=================================================Fetch');
     final response = await http.get(
       Uri.parse(

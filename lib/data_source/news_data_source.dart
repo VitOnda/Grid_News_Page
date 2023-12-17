@@ -13,11 +13,15 @@ class NewsDataSource {
     print(response.body);
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      return data['articles']
-          .map<NewsModel>((e) => NewsModel.fromJson(e))
-          .tolist;
+      if (data['articles'] != null) {
+        return data['articles']
+            .map<NewsModel>((element) => NewsModel.fromJson(element))
+            .tolist;
+      } else {
+        throw Exception('Error. Load news list');
+      }
     } else {
-      throw Exception('Error. Load news list');
-    }
+      throw Exception('Error: ${response.reasonPhrase}');
+   }
   }
 }

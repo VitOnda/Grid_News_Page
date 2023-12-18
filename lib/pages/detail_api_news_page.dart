@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:grid_api_news/model/news_model.dart';
 
 class DetailApiNewsPage extends StatelessWidget {
-    const DetailApiNewsPage({super.key});
+  final NewsModel news;
+    const DetailApiNewsPage({super.key, required this.news});
 
 
     @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grid_api_news/data_source/news_data_source.dart';
 import '../model/news_model.dart';
+import 'detail_api_news_page.dart';
 
 class ApiNewsPage extends StatefulWidget {
   const ApiNewsPage({super.key});
@@ -58,23 +59,37 @@ class _ApiNewsPageState extends State<ApiNewsPage> {
               ),
               itemBuilder: (BuildContext context, int index) {
                 final NewsModel news = snapshot.data![index];
-                return Card(
-                  child: Column(
-                    children: [
-                      Image.network(
-                        news.urlToImage,
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailApiNewsPage(news: news),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Text(
-                          news.title,
+                    );
+                  },
+                  child: Card(
+                    child: Column(
+                      children: [
+                        Image.network(
+                          news.urlToImage!,
+                          errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                            return const SizedBox.shrink();
+                          },
                         ),
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            news.title,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
             );
+
           }
         }
       ),
